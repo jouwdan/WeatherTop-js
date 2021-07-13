@@ -1,2 +1,4 @@
-# WeatherTop-js
- WeatherTop assignment in JavaScript
+WeatherTop Baseline Release
+=========================
+
+Baseline release of the WeatherTop application

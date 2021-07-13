@@ -1,0 +1,51 @@
+{
+  "stationCollection": [
+    {
+      "id": "01",
+      "name": "Tramore",
+      "readings": [
+        {
+          "id": "02",
+          "code": 800,
+          "temperature": 0.5,
+          "windSpeed": 3.5,
+          "pressure": 1002
+        },
+        {
+          "id": "03",
+          "code": 600,
+          "temperature": 6,
+          "windSpeed": 2,
+          "pressure": 1004
+        },
+        {
+          "id": "04",
+          "code": 700,
+          "temperature": 8,
+          "windSpeed": 1,
+          "pressure": 1005
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "name": "Dunmore",
+      "readings": [
+        {
+          "id": "06",
+          "code": 700,
+          "temperature": 8,
+          "windSpeed": 1,
+          "pressure": 999
+        },
+        {
+          "id": "07",
+          "code": 200,
+          "temperature": 0.5,
+          "windSpeed": 3.5,
+          "pressure": 1000
+        }
+      ]
+    }
+  ]
+}

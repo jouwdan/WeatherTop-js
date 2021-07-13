@@ -1,0 +1,59 @@
+{{> menu id="dashboard"}}
+
+{{#each stations}}
+  <section class="card bg-base-200 p-4 mb-4">
+    <h2 class="text-lg">
+      {{name}}
+    </h2>
+    <div class="flex flex-wrap container">
+    
+    <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
+      <span class="text-lg">{{name}}</span>
+    </div>
+    <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
+      <span class="text-lg">Weather</span>
+      {{#each readings}}{{#if @last}}{{{weatherCodeString}}}{{/if}}{{/each}}
+    </div>
+    <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
+      <span class="text-lg">Temperature</span>
+      {{#each readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F{{/if}}{{/each}}
+    </div>
+    <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
+      <span class="text-lg">Wind</span>
+      {{#each readings}}{{#if @last}}{{windSpeedInBft}}{{/if}}{{/each}}
+    </div>
+    <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
+      <span class="text-lg">Pressure</span>
+      {{#each readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa
+    </div>
+    </div>
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Temp</th>
+          <th>Wind Speed</th>
+          <th>Pressure</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each readings}}
+          <tr>
+            <td>
+              {{code}}
+            </td>
+            <td>
+              {{temperature}}
+            </td>
+            <td>
+              {{windSpeed}}
+            </td>
+            <td>
+              {{pressure}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </section>
+{{/each}}
