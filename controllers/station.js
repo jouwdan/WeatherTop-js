@@ -1,21 +1,22 @@
-"use strict";
+'use strict';
 
 const logger = require("../utils/logger");
 const weatherUtil = require("../utils/weatherUtil");
 const stationStore = require("../models/station-store");
 const uuid = require("uuid");
 
-const dashboard = {
+const station = {
   index(request, response) {
-    logger.info("dashboard rendering");
-    
+    const stationId = request.params.id;
+    logger.info('Station id = ' + stationId);
+
     let fahrenheit = null;
     let weatherCodeString = null;
     let windSpeedInBft = null;
     let feelsLike = null;
     let windDirection = null;
-    for (let i = 0; i < stationStore.getAllStations().length; i++) {
-      const lastReading = stationStore.getAllStations()[i].readings[stationStore.getAllStations()[i].readings.length - 1];
+    for (let i = 0; i < stationStore.getStation(stationId).length; i++) {
+      const lastReading = stationStore.getStation(stationId).readings[i][stationStore.getStation(stationId).readings[i].length - 1];
       
       weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
       lastReading.weatherCodeString = weatherCodeString;
@@ -34,23 +35,25 @@ const dashboard = {
     }
 
     const viewData = {
-      title: "WeatherTop | Dashboard",
-      stations: stationStore.getAllStations()
+      title: "WeatherTop | " + stationStore.getStation(stationId).name,
+      station: stationStore.getStation(stationId),
     };
-    response.render("dashboard", viewData);
+    response.render('station', viewData);
   },
 
-  addStation(request, response) {
-    const newStation = {
+  addReading(request, response) {
+    const stationId = request.params.id;
+    const station = stationStore.getStation(stationId);
+    const newReading = {
       id: uuid.v1(),
-      name: request.body.name,
-      latitude: request.body.latitude,
-      longitude: request.body.longitude,
-      readings: [],
+      code: request.body.code,
+      temperature: request.body.temperature,
+      windSpeed: request.body.windSpeed,
+      pressure: request.body.pressure,
     };
-    stationStore.addStation(newStation);
-    response.redirect("/dashboard");
+    stationStore.addReading(stationId, newReading);
+    response.redirect('/station/' + stationId);
   },
 };
 
-module.exports = dashboard;
+module.exports = station;

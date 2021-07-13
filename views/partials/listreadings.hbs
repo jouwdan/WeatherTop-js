@@ -1,0 +1,30 @@
+<section class="card bg-base-200 p-4 mb-4">
+<table class="table w-full">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Temperature</th>
+          <th>Wind Speed</th>
+          <th>Pressure</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each station.readings}}
+          <tr>
+            <td>
+              {{code}}
+            </td>
+            <td>
+              {{temperature}}
+            </td>
+            <td>
+              {{windSpeed}}
+            </td>
+            <td>
+              {{pressure}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    </section>
