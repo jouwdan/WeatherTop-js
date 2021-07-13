@@ -1,4 +1,4 @@
-WeatherTop Baseline Release
+WeatherTop Release 1
 =========================
 
-Baseline release of the WeatherTop application
+The first release version of the WeatherTop application
