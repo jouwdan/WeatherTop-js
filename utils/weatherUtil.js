@@ -61,7 +61,55 @@ const weatherUtil = {
       windSpeedToBft = "Unknown";
     }
     return windSpeedToBft;
-  }
+  },
+
+  feelsLikeConversion(temperature, windSpeed) {
+    let feelsLikeTemp = null;
+    feelsLikeTemp = Math.round((13.12 + 0.6215 * temperature - 11.37 * Math.pow(windSpeed, 0.16) 
+    + 0.3965 * temperature * Math.pow(windSpeed, 0.16)) * 10.0) / 10.0;
+    return feelsLikeTemp;
+  },
+
+  windDirectionToText(windDirection) {
+    let windDirectionToText = null;
+    if ((windDirection >= 348.75) && (windDirection <= 360) ||
+        (windDirection >= 0) && (windDirection < 11.25)) {
+      windDirectionToText = "North";
+    } else if ((windDirection >= 11.25) && (windDirection < 33.75)) {
+      windDirectionToText = "North North East";
+    } else if ((windDirection >= 33.75) && (windDirection < 56.25)) {
+      windDirectionToText = "North East";
+    } else if ((windDirection >= 56.25) && (windDirection < 78.75)) {
+      windDirectionToText = "East North East";
+    } else if ((windDirection >= 78.75) && (windDirection < 101.25)) {
+      windDirectionToText = "East";
+    } else if ((windDirection >= 101.25) && (windDirection < 123.75)) {
+      windDirectionToText = "East South East";
+    } else if ((windDirection >= 123.75) && (windDirection < 146.25)) {
+      windDirectionToText = "South East";
+    } else if ((windDirection >= 146.25) && (windDirection < 168.75)) {
+      windDirectionToText = "South South East";
+    } else if ((windDirection >= 168.75) && (windDirection < 191.25)) {
+      windDirectionToText = "South";
+    } else if ((windDirection >= 191.25) && (windDirection < 213.75)) {
+      windDirectionToText = "South South West";
+    } else if ((windDirection >= 213.75) && (windDirection < 236.25)) {
+      windDirectionToText = "South West";
+    } else if ((windDirection >= 236.25) && (windDirection < 258.75)) {
+      windDirectionToText = "West South West";
+    } else if ((windDirection >= 258.75) && (windDirection < 281.25)) {
+      windDirectionToText = "West";
+    } else if ((windDirection >= 281.25) && (windDirection < 303.75)) {
+      windDirectionToText = "West North West";
+    } else if ((windDirection >= 303.75) && (windDirection < 326.25)) {
+      windDirectionToText = "North West";
+    } else if ((windDirection >= 326.25) && (windDirection < 348.75)) {
+      windDirectionToText = "North North West";
+    } else {
+      windDirectionToText = "Unknown";
+    }
+    return windDirectionToText;
+  },
 };
 
 module.exports = weatherUtil;

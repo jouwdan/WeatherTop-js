@@ -13,6 +13,8 @@ const station = {
     let fahrenheit = null;
     let weatherCodeString = null;
     let windSpeedInBft = null;
+    let feelsLike = null;
+    let windDirection = null;
     for (let i = 0; i < stationStore.getStation(stationId).length; i++) {
       const lastReading = stationStore.getStation(stationId).readings[i][stationStore.getStation(stationId).readings[i].length - 1];
       
@@ -24,6 +26,12 @@ const station = {
       
       windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
       lastReading.windSpeedInBft = windSpeedInBft;
+
+      feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+      lastReading.feelsLike = feelsLike;
+
+      windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
+      lastReading.windDirection = windDirection;
     }
 
     const viewData = {
