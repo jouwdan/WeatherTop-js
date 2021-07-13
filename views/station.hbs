@@ -1,37 +1,37 @@
-{{> menu id="dashboard"}}
+{{> menu}}
 
-{{#each stations}}
   <section class="card bg-base-200 p-4 mb-4">
-    <h2 class="text-xl">
-      {{name}}
+    <h2 class="text-lg">
+      {{station.name}}
     </h2>
     <div class="flex flex-wrap container">
     
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
-      <span class="text-lg">{{name}}</span>
+      <span class="text-lg">{{station.name}}</span>
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Weather</span>
-      {{#each readings}}{{#if @last}}{{{weatherCodeString}}}{{/if}}{{/each}}
+      {{#each station.readings}}{{#if @last}}{{{weatherCodeString}}}{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Temperature</span>
-      {{#each readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F{{/if}}{{/each}}
+      {{#each station.readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Wind</span>
-      {{#each readings}}{{#if @last}}{{windSpeedInBft}}{{/if}}{{/each}}
+      {{#each station.readings}}{{#if @last}}{{windSpeedInBft}}{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Pressure</span>
-      {{#each readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa
+      {{#each station.readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa
     </div>
     </div>
-    <a href="/station/{{id}}"><button class="btn btn-primary">View Station</button></a>
   </section>
-{{/each}}
 
-<section class="card bg-base-200 p-4 mb-4">
-    <h2 class="text text-xl">Add Station</h2>
-    {{> addstation}}
+
+{{> listreadings}}
+
+  <section class="card bg-base-200 p-4 mb-4">
+    <h2 class="text text-xl">Add Reading</h2>
+    {{> addreading}}
   </section>

@@ -2,7 +2,8 @@
 
 const logger = require("../utils/logger");
 const weatherUtil = require("../utils/weatherUtil");
-const stationCollection = require("../models/station-store.js");
+const stationStore = require("../models/station-store");
+const uuid = require("uuid");
 
 const dashboard = {
   index(request, response) {
@@ -11,8 +12,8 @@ const dashboard = {
     let fahrenheit = null;
     let weatherCodeString = null;
     let windSpeedInBft = null;
-    for (let i = 0; i < stationCollection.length; i++) {
-      const lastReading = stationCollection[i].readings[stationCollection[i].readings.length - 1];
+    for (let i = 0; i < stationStore.getAllStations().length; i++) {
+      const lastReading = stationStore.getAllStations()[i].readings[stationStore.getAllStations()[i].readings.length - 1];
       
       weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
       lastReading.weatherCodeString = weatherCodeString;
@@ -25,13 +26,23 @@ const dashboard = {
     }
 
     const viewData = {
-      title: "WeatherTop Dashboard",
-      stations: stationCollection
+      title: "WeatherTop | Dashboard",
+      stations: stationStore.getAllStations()
     };
-    
-    //logger.info("about to render", stationCollection);
     response.render("dashboard", viewData);
-  }
+  },
+
+  addStation(request, response) {
+    const newStation = {
+      id: uuid.v1(),
+      name: request.body.name,
+      latitude: request.body.latitude,
+      longitude: request.body.longitude,
+      readings: [],
+    };
+    stationStore.addStation(newStation);
+    response.redirect("/dashboard");
+  },
 };
 
 module.exports = dashboard;

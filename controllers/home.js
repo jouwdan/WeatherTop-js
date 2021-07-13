@@ -6,7 +6,7 @@ const home = {
   index(request, response) {
     logger.info("home rendering");
     const viewData = {
-      title: "Playlist 1"
+      title: "WeatherTop | Home"
     };
     response.render("home", viewData);
   }
