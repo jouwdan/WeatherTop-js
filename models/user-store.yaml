@@ -1,0 +1,24 @@
+Station(s1):
+  name: Tramore
+  lat: 52.160
+  lng: -7.152
+  readings:
+    - r1
+    - r2
+
+Station(s2):
+  name: Dunmore 
+  lat: 52.149
+  lng: -6.994
+  readings:
+    - r3
+    - r4
+
+Member(m1):
+  email: homer@simpson.com
+  password: secret
+  firstname: Homer
+  lastname : Simpson
+  stations :
+    - s1
+    - s2
