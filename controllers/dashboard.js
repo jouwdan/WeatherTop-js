@@ -16,6 +16,7 @@ const dashboard = {
     let feelsLike = null;
     let windDirection = null;
     for (let i = 0; i < stationStore.getAllStations().length; i++) {
+      if (stationStore.getAllStations()[i].readings[stationStore.getAllStations()[i].readings.length] >= 1) {
       const lastReading = stationStore.getAllStations()[i].readings[stationStore.getAllStations()[i].readings.length - 1];
       
       weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
@@ -32,8 +33,8 @@ const dashboard = {
 
       windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
       lastReading.windDirection = windDirection;
+      }
     }
-
     const viewData = {
       title: "WeatherTop | Dashboard",
       stations: stationStore.getUserStations(loggedInUser.id),

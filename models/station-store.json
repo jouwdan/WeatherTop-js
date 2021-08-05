@@ -27,7 +27,11 @@
           "temperature": 8,
           "windSpeed": 1,
           "pressure": 1005,
-          "windDirection": 101
+          "windDirection": "Unknown",
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-snowflake'></i></span>Snow",
+          "tempInF": 46.4,
+          "windSpeedInBft": "0 bft",
+          "feelsLike": 9.9
         }
       ]
     },
@@ -50,7 +54,27 @@
           "temperature": 0.5,
           "windSpeed": 3.5,
           "pressure": 1000,
-          "windDirection": 102
+          "windDirection": "Unknown",
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-cloud-sun'></i></span>Partial Clouds",
+          "tempInF": 32.9,
+          "windSpeedInBft": "1 bft",
+          "feelsLike": -0.2
+        }
+      ]
+    },
+    {
+      "id": "1a884ac0-f623-11eb-add4-9f98c7f0951c",
+      "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
+      "name": "Test Station",
+      "latitude": "14.124",
+      "longitude": "12.042",
+      "readings": [
+        {
+          "id": "87c7f1f0-f626-11eb-8699-990ee0d6f71b",
+          "code": "123",
+          "temperature": "12.7",
+          "windSpeed": "21.4",
+          "pressure": "1024"
         }
       ]
     }

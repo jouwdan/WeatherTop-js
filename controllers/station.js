@@ -17,6 +17,7 @@ const station = {
     let feelsLike = null;
     let windDirection = null;
     for (let i = 0; i < stationStore.getStation(stationId).length; i++) {
+      if (stationStore.getStation(stationId).readings[i][stationStore.getStation(stationId).readings[i].length] >= 1) {
       const lastReading = stationStore.getStation(stationId).readings[i][stationStore.getStation(stationId).readings[i].length - 1];
       
       weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
@@ -33,6 +34,7 @@ const station = {
 
       windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
       lastReading.windDirection = windDirection;
+      }
     }
 
     const viewData = {
