@@ -1,8 +1,11 @@
 {
-  "stationCollection": [{
+  "stationCollection": [
+    {
       "id": "01",
       "name": "Tramore",
-      "readings": [{
+      "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
+      "readings": [
+        {
           "id": "02",
           "code": 800,
           "temperature": 0.5,
@@ -31,7 +34,9 @@
     {
       "id": "05",
       "name": "Dunmore",
-      "readings": [{
+      "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
+      "readings": [
+        {
           "id": "06",
           "code": 700,
           "temperature": 8,

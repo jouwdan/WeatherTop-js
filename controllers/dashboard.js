@@ -3,12 +3,13 @@
 const logger = require("../utils/logger");
 const weatherUtil = require("../utils/weatherUtil");
 const stationStore = require("../models/station-store");
+const accounts = require ("./accounts");
 const uuid = require("uuid");
 
 const dashboard = {
   index(request, response) {
     logger.info("dashboard rendering");
-    
+    const loggedInUser = accounts.getCurrentUser(request);
     let fahrenheit = null;
     let weatherCodeString = null;
     let windSpeedInBft = null;
@@ -35,14 +36,16 @@ const dashboard = {
 
     const viewData = {
       title: "WeatherTop | Dashboard",
-      stations: stationStore.getAllStations()
+      stations: stationStore.getUserStations(loggedInUser.id),
     };
     response.render("dashboard", viewData);
   },
 
   addStation(request, response) {
+    const loggedInUser = accounts.getCurrentUser(request);
     const newStation = {
       id: uuid.v1(),
+      userid: loggedInUser.id,
       name: request.body.name,
       latitude: request.body.latitude,
       longitude: request.body.longitude,

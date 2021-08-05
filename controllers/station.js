@@ -3,13 +3,14 @@
 const logger = require("../utils/logger");
 const weatherUtil = require("../utils/weatherUtil");
 const stationStore = require("../models/station-store");
+const accounts = require("./accounts");
 const uuid = require("uuid");
 
 const station = {
   index(request, response) {
     const stationId = request.params.id;
     logger.info('Station id = ' + stationId);
-
+    const loggedInUser = accounts.getCurrentUser(request);
     let fahrenheit = null;
     let weatherCodeString = null;
     let windSpeedInBft = null;
