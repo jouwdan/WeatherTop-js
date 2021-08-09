@@ -27,7 +27,12 @@
           "temperature": 8,
           "windSpeed": 1,
           "pressure": 1005,
-          "windDirection": 101
+          "windDirection": 101,
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-snowflake'></i></span>Snow",
+          "windDirectionText": "East",
+          "tempInF": 46.4,
+          "windSpeedInBft": "0 bft",
+          "feelsLike": 9.9
         }
       ]
     },
@@ -50,7 +55,29 @@
           "temperature": 0.5,
           "windSpeed": 3.5,
           "pressure": 1000,
-          "windDirection": 102
+          "windDirection": 102,
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-cloud-sun'></i></span>Partial Clouds",
+          "windDirectionText": "East South East",
+          "tempInF": 32.9,
+          "windSpeedInBft": "1 bft",
+          "feelsLike": -0.2
+        }
+      ]
+    },
+    {
+      "id": "5711c0a0-f93b-11eb-b294-45843ce371c4",
+      "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
+      "name": "Glenbarrow",
+      "latitude": "53.1208",
+      "longitude": "7.4551",
+      "readings": [
+        {
+          "id": "c39683a0-f93b-11eb-911b-07f67b18461d",
+          "code": "123",
+          "temperature": "16.4",
+          "windSpeed": "12.4",
+          "windDirection": "102",
+          "pressure": "806"
         }
       ]
     }

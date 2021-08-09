@@ -16,19 +16,20 @@ const dashboard = {
       let userStations = stationStore.getUserStations(loggedInUser.id);
       let weatherCodeString, fahrenheit, windSpeedInBft, feelsLike, windDirection = null;
       for (let i = 0; i < userStations.length; i++) {
-              const lastReading = userStations[i].readings[userStations[i].readings.length - 1];
-
-              weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
-              fahrenheit = weatherUtil.cToF(lastReading.temperature);
-              windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
-              feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
-              windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
+        if (userStations[i].readings.length >= 1) {
+          const lastReading = userStations[i].readings[userStations[i].readings.length - 1];
+          weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
+          fahrenheit = weatherUtil.cToF(lastReading.temperature);
+          windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
+          feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+          windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
               
-              lastReading.weatherCodeString = weatherCodeString;
-              lastReading.windDirectionText = windDirection;
-              lastReading.tempInF = fahrenheit;
-              lastReading.windSpeedInBft = windSpeedInBft;
-              lastReading.feelsLike = feelsLike;
+          lastReading.weatherCodeString = weatherCodeString;
+          lastReading.windDirectionText = windDirection;
+          lastReading.tempInF = fahrenheit;
+          lastReading.windSpeedInBft = windSpeedInBft;
+          lastReading.feelsLike = feelsLike;
+        }
       }
 
       const viewData = {

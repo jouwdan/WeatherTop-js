@@ -49,6 +49,7 @@ const station = {
       code: request.body.code,
       temperature: request.body.temperature,
       windSpeed: request.body.windSpeed,
+      windDirection: request.body.windDirection,
       pressure: request.body.pressure,
     };
     stationStore.addReading(stationId, newReading);
