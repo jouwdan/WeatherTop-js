@@ -3,47 +3,46 @@
 const logger = require("../utils/logger");
 const weatherUtil = require("../utils/weatherUtil");
 const stationStore = require("../models/station-store");
-const accounts = require ("./accounts");
+const account = require("./account");
 const uuid = require("uuid");
 
 const dashboard = {
   index(request, response) {
-    logger.info("dashboard rendering");
-    const loggedInUser = accounts.getCurrentUser(request);
-    let fahrenheit = null;
-    let weatherCodeString = null;
-    let windSpeedInBft = null;
-    let feelsLike = null;
-    let windDirection = null;
-    for (let i = 0; i < stationStore.getAllStations().length; i++) {
-      if (stationStore.getAllStations()[i].readings[stationStore.getAllStations()[i].readings.length] >= 1) {
-      const lastReading = stationStore.getAllStations()[i].readings[stationStore.getAllStations()[i].readings.length - 1];
-      
-      weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
-      lastReading.weatherCodeString = weatherCodeString;
-      
-      fahrenheit = weatherUtil.cToF(lastReading.temperature);
-      lastReading.tempInF = fahrenheit;
-      
-      windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
-      lastReading.windSpeedInBft = windSpeedInBft;
+    const loggedInUser = account.getCurrentUser(request);
+    if (loggedInUser) {
+      logger.info("Logged in user: " + loggedInUser.email);
+      logger.info("Rendering dashboard");
 
-      feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
-      lastReading.feelsLike = feelsLike;
+      let userStations = stationStore.getUserStations(loggedInUser.id);
+      let weatherCodeString, fahrenheit, windSpeedInBft, feelsLike, windDirection = null;
+      for (let i = 0; i < userStations.length; i++) {
+              const lastReading = userStations[i].readings[userStations[i].readings.length - 1];
 
-      windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
-      lastReading.windDirection = windDirection;
+              weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
+              fahrenheit = weatherUtil.cToF(lastReading.temperature);
+              windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
+              feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+              windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
+              
+              lastReading.weatherCodeString = weatherCodeString;
+              lastReading.windDirectionText = windDirection;
+              lastReading.tempInF = fahrenheit;
+              lastReading.windSpeedInBft = windSpeedInBft;
+              lastReading.feelsLike = feelsLike;
       }
-    }
-    const viewData = {
-      title: "WeatherTop | Dashboard",
-      stations: stationStore.getUserStations(loggedInUser.id),
-    };
-    response.render("dashboard", viewData);
-  },
 
+      const viewData = {
+        title: "WeatherTop | Dashboard",
+        loggedInUser: loggedInUser,
+        stations: userStations,
+      };
+      response.render("dashboard", viewData);
+    } else {
+      response.redirect("/login");
+    };
+  },
   addStation(request, response) {
-    const loggedInUser = accounts.getCurrentUser(request);
+    const loggedInUser = account.getCurrentUser(request);
     const newStation = {
       id: uuid.v1(),
       userid: loggedInUser.id,

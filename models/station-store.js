@@ -55,6 +55,14 @@ const stationStore = {
     const readings = station.readings.filter(reading => reading.id == readingId);
     return readings[0];
   },
+
+  updateReading(stationId, readingId, readingContent) {
+    const station = this.getStation(stationId);
+    const reading = station.readings.filter(reading => reading.id == readingId);
+    station(stationId).readings(readingId).push(readingContent);
+    _.replace(reading, reading, readingContent);
+    this.store.save();
+  }
 };
 
 module.exports = stationStore;

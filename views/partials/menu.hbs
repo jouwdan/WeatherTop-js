@@ -4,11 +4,17 @@
   </div> 
   <div class="flex-none hidden px-2 mx-2 lg:flex">
     <div class="flex items-stretch">
+      {{#if loggedInUser}}
       <a id="dashboard" class="btn btn-ghost rounded-btn" href="/dashboard">Dashboard</a> 
+      {{/if}}
       <a id="about" class="btn btn-ghost rounded-btn" href="/about">About</a> 
-      <a id="signup" class="btn btn-ghost rounded-btn" href="/signup">Register</a> 
+      {{#unless loggedInUser}}
+      <a id="register" class="btn btn-ghost rounded-btn" href="/register">Register</a> 
       <a id="login" class="btn btn-ghost rounded-btn" href="/login">Log In</a> 
+      {{/unless}}
+      {{#if loggedInUser}}
       <a id="logout" class="btn btn-ghost rounded-btn" href="/logout">Log Out</a> 
+      {{/if}}
 
     </div>
   </div> 

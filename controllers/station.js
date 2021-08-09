@@ -1,45 +1,42 @@
-'use strict';
+"use strict";
 
 const logger = require("../utils/logger");
+const account = require("./account");
 const weatherUtil = require("../utils/weatherUtil");
 const stationStore = require("../models/station-store");
-const accounts = require("./accounts");
 const uuid = require("uuid");
 
 const station = {
   index(request, response) {
+    const loggedInUser = account.getCurrentUser(request);
     const stationId = request.params.id;
     logger.info('Station id = ' + stationId);
-    const loggedInUser = accounts.getCurrentUser(request);
+
     let fahrenheit = null;
     let weatherCodeString = null;
     let windSpeedInBft = null;
     let feelsLike = null;
     let windDirection = null;
     for (let i = 0; i < stationStore.getStation(stationId).length; i++) {
-      if (stationStore.getStation(stationId).readings[i][stationStore.getStation(stationId).readings[i].length] >= 1) {
-      const lastReading = stationStore.getStation(stationId).readings[i][stationStore.getStation(stationId).readings[i].length - 1];
-      
-      weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
-      lastReading.weatherCodeString = weatherCodeString;
-      
-      fahrenheit = weatherUtil.cToF(lastReading.temperature);
-      lastReading.tempInF = fahrenheit;
-      
-      windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
-      lastReading.windSpeedInBft = windSpeedInBft;
+        const lastReading = userStations[i].readings[userStations[i].readings.length - 1];
 
-      feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
-      lastReading.feelsLike = feelsLike;
-
-      windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
-      lastReading.windDirection = windDirection;
-      }
+        weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
+        fahrenheit = weatherUtil.cToF(lastReading.temperature);
+        windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
+        feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+        windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
+        
+        lastReading.weatherCodeString = weatherCodeString;
+        lastReading.windDirectionText = windDirection;
+        lastReading.tempInF = fahrenheit;
+        lastReading.windSpeedInBft = windSpeedInBft;
+        lastReading.feelsLike = feelsLike;
     }
 
     const viewData = {
       title: "WeatherTop | " + stationStore.getStation(stationId).name,
       station: stationStore.getStation(stationId),
+      loggedInUser: loggedInUser,
     };
     response.render('station', viewData);
   },
