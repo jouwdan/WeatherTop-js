@@ -16,7 +16,8 @@
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Temperature</span>
       {{#each station.readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F<br>
-      Feels Like: {{feelsLike}}°C{{/if}}{{/each}}
+      Feels Like: {{feelsLike}}°C{{/if}}{{/each}}<br>
+      Min Temp: {{station.minTemp}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Wind</span>

@@ -77,7 +77,20 @@
           "temperature": "16.4",
           "windSpeed": "12.4",
           "windDirection": "102",
-          "pressure": "806"
+          "pressure": "806",
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-poo-storm'></i></span>Unknown",
+          "tempInF": 61.519999999999996,
+          "windSpeedInBft": "3 bft",
+          "feelsLike": 16,
+          "windDirectionText": "East South East"
+        },
+        {
+          "id": "85d61650-f942-11eb-ab8e-c16996a9f019",
+          "code": "987",
+          "temperature": "14.5",
+          "windSpeed": "16.9",
+          "windDirection": "312",
+          "pressure": "945"
         }
       ]
     }

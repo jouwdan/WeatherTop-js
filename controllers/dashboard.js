@@ -14,21 +14,14 @@ const dashboard = {
       logger.info("Rendering dashboard");
 
       let userStations = stationStore.getUserStations(loggedInUser.id);
-      let weatherCodeString, fahrenheit, windSpeedInBft, feelsLike, windDirection = null;
       for (let i = 0; i < userStations.length; i++) {
         if (userStations[i].readings.length >= 1) {
           const lastReading = userStations[i].readings[userStations[i].readings.length - 1];
-          weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
-          fahrenheit = weatherUtil.cToF(lastReading.temperature);
-          windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
-          feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
-          windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
-              
-          lastReading.weatherCodeString = weatherCodeString;
-          lastReading.windDirectionText = windDirection;
-          lastReading.tempInF = fahrenheit;
-          lastReading.windSpeedInBft = windSpeedInBft;
-          lastReading.feelsLike = feelsLike;
+          lastReading.weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
+          lastReading.tempInF = weatherUtil.cToF(lastReading.temperature);
+          lastReading.windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
+          lastReading.feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+          lastReading.windDirectionText = weatherUtil.windDirectionToText(lastReading.windDirection);
         }
       }
 

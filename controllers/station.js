@@ -12,29 +12,32 @@ const station = {
     const stationId = request.params.id;
     logger.info('Station id = ' + stationId);
 
-    let fahrenheit = null;
-    let weatherCodeString = null;
-    let windSpeedInBft = null;
-    let feelsLike = null;
-    let windDirection = null;
-    for (let i = 0; i < stationStore.getStation(stationId).length; i++) {
-        const lastReading = userStations[i].readings[userStations[i].readings.length - 1];
+    let currentStation = stationStore.getStation(stationId);
+    for (let i = 0; i < currentStation.length; i++) {
+      if (currentStation.length >= 1) {
+        const lastReading = stationStore.getStation(stationId).readings[stationStore.getStation(stationId)[i].readings.length - 1];
 
-        weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
-        fahrenheit = weatherUtil.cToF(lastReading.temperature);
-        windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
-        feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
-        windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
-        
-        lastReading.weatherCodeString = weatherCodeString;
-        lastReading.windDirectionText = windDirection;
-        lastReading.tempInF = fahrenheit;
-        lastReading.windSpeedInBft = windSpeedInBft;
-        lastReading.feelsLike = feelsLike;
+        lastReading.weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
+        lastReading.tempInF = weatherUtil.cToF(lastReading.temperature);
+        lastReading.windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
+        lastReading.feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+        lastReading.windDirectionText = weatherUtil.windDirectionToText(lastReading.windDirection);
+
+        for(let j = 0; j < currentStation.readings.length; j++) {
+          if (!currentStation.minTemp) {
+            currentStation.minTemp = 2147483647.0;
+          }
+          if (stationStore.getStation(stationId).readings[j].temperature < currentStation.minTemp) {
+            currentStation.temperature = reading.temperature;
+          } else {
+            return null;
+          }
+        }
+      }
     }
 
     const viewData = {
-      title: "WeatherTop | " + stationStore.getStation(stationId).name,
+      title: "WeatherTop | " + currentStation.name,
       station: stationStore.getStation(stationId),
       loggedInUser: loggedInUser,
     };
