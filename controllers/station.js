@@ -12,28 +12,25 @@ const station = {
     const stationId = request.params.id;
     logger.info('Station id = ' + stationId);
 
-    let currentStation = stationStore.getStation(stationId);
-    for (let i = 0; i < currentStation.length; i++) {
-      if (currentStation.length >= 1) {
-        const lastReading = stationStore.getStation(stationId).readings[stationStore.getStation(stationId)[i].readings.length - 1];
+    const currentStation = stationStore.getStation(stationId);
+    const lastReading = currentStation.readings[currentStation.readings.length - 1];
 
-        lastReading.weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
-        lastReading.tempInF = weatherUtil.cToF(lastReading.temperature);
-        lastReading.windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
-        lastReading.feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
-        lastReading.windDirectionText = weatherUtil.windDirectionToText(lastReading.windDirection);
+    if (currentStation.readings.length >= 1) {
+      lastReading.weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
+      lastReading.tempInF = weatherUtil.cToF(lastReading.temperature);
+      lastReading.windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
+      lastReading.feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+      lastReading.windDirectionText = weatherUtil.windDirectionToText(lastReading.windDirection);
 
-        for(let j = 0; j < currentStation.readings.length; j++) {
-          if (!currentStation.minTemp) {
-            currentStation.minTemp = 2147483647.0;
-          }
-          if (stationStore.getStation(stationId).readings[j].temperature < currentStation.minTemp) {
-            currentStation.temperature = reading.temperature;
-          } else {
-            return null;
-          }
-        }
-      }
+      let minTempSortedArray = currentStation.readings.sort(function(a, b) {
+          return parseFloat(a['temperature']) - parseFloat(b['temperature']);
+      });
+      currentStation.minTemp = weatherUtil.minTemp(currentStation)[0]['temperature'];
+      currentStation.maxTemp = weatherUtil.maxTemp(currentStation)[0]['temperature'];
+      currentStation.minWindSpeed = weatherUtil.minWindSpeed(currentStation)[0]['windSpeed'];
+      currentStation.maxWindSpeed = weatherUtil.maxWindSpeed(currentStation)[0]['windSpeed'];
+      currentStation.minPressure = weatherUtil.minPressure(currentStation)[0]['pressure'];
+      currentStation.maxPressure = weatherUtil.maxPressure(currentStation)[0]['pressure'];
     }
 
     const viewData = {

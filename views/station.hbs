@@ -17,16 +17,21 @@
       <span class="text-lg">Temperature</span>
       {{#each station.readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F<br>
       Feels Like: {{feelsLike}}°C{{/if}}{{/each}}<br>
-      Min Temp: {{station.minTemp}}
+      Max Temp: {{station.maxTemp}}°C<br>
+      Min Temp: {{station.minTemp}}°C
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Wind</span>
       {{#each station.readings}}{{#if @last}}
-      Direction: {{windDirectionText}}<br>{{windSpeedInBft}}{{/if}}{{/each}}
+      Direction: {{windDirectionText}}<br>{{windSpeedInBft}}{{/if}}{{/each}}<br>
+      Max Speed: {{station.maxWindSpeed}}<br>
+      Min Speed: {{station.minWindSpeed}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Pressure</span>
-      {{#each station.readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa
+      {{#each station.readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa<br>
+      Max Pressure: {{station.maxPressure}} hpa<br>
+      Min Pressure: {{station.minPressure}} hpa
     </div>
     </div>
   </section>

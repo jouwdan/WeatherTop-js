@@ -113,6 +113,42 @@ const weatherUtil = {
         }
         return windDirectionToText;
     },
+
+    minTemp(stationArray) {
+        return stationArray.readings.sort(function(a, b) {
+            return parseFloat(a['temperature']) - parseFloat(b['temperature']);
+        });
+    },
+
+    maxTemp(stationArray) {
+        return stationArray.readings.sort(function(a, b) {
+            return parseFloat(b['temperature']) - parseFloat(a['temperature']);
+        });
+    },
+
+    minWindSpeed(stationArray) {
+        return stationArray.readings.sort(function(a, b) {
+            return parseFloat(a['windSpeed']) - parseFloat(b['windSpeed']);
+        });
+    },
+
+    maxWindSpeed(stationArray) {
+        return stationArray.readings.sort(function(a, b) {
+            return parseFloat(b['windSpeed']) - parseFloat(a['windSpeed']);
+        });
+    },
+
+    minPressure(stationArray) {
+        return stationArray.readings.sort(function(a, b) {
+            return parseFloat(a['pressure']) - parseFloat(b['pressure']);
+        });
+    },
+
+    maxPressure(stationArray) {
+        return stationArray.readings.sort(function(a, b) {
+            return parseFloat(b['pressure']) - parseFloat(a['pressure']);
+        });
+    },
 };
 
 module.exports = weatherUtil;

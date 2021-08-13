@@ -42,14 +42,6 @@
       "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
       "readings": [
         {
-          "id": "06",
-          "code": 700,
-          "temperature": 8,
-          "windSpeed": 1,
-          "pressure": 999,
-          "windDirection": 98
-        },
-        {
           "id": "07",
           "code": 200,
           "temperature": 0.5,
@@ -61,8 +53,22 @@
           "tempInF": 32.9,
           "windSpeedInBft": "1 bft",
           "feelsLike": -0.2
+        },
+        {
+          "id": "06",
+          "code": 700,
+          "temperature": 8,
+          "windSpeed": 1,
+          "pressure": 999,
+          "windDirection": 98,
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-snowflake'></i></span>Snow",
+          "tempInF": 46.4,
+          "windSpeedInBft": "0 bft",
+          "feelsLike": 9.9,
+          "windDirectionText": "East"
         }
-      ]
+      ],
+      "minTemp": 0.5
     },
     {
       "id": "5711c0a0-f93b-11eb-b294-45843ce371c4",
@@ -71,6 +77,19 @@
       "latitude": "53.1208",
       "longitude": "7.4551",
       "readings": [
+        {
+          "id": "85d61650-f942-11eb-ab8e-c16996a9f019",
+          "code": "987",
+          "temperature": "14.5",
+          "windSpeed": "16.9",
+          "windDirection": "312",
+          "pressure": "945",
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-poo-storm'></i></span>Unknown",
+          "tempInF": 58.1,
+          "windSpeedInBft": "3 bft",
+          "feelsLike": 13.3,
+          "windDirectionText": "North West"
+        },
         {
           "id": "c39683a0-f93b-11eb-911b-07f67b18461d",
           "code": "123",
@@ -85,14 +104,15 @@
           "windDirectionText": "East South East"
         },
         {
-          "id": "85d61650-f942-11eb-ab8e-c16996a9f019",
-          "code": "987",
-          "temperature": "14.5",
-          "windSpeed": "16.9",
-          "windDirection": "312",
-          "pressure": "945"
+          "id": "90c1f010-fc59-11eb-9de5-1dc5d96d41c2",
+          "code": "567",
+          "temperature": "11.1",
+          "windSpeed": "25.6",
+          "windDirection": "265",
+          "pressure": "1010"
         }
-      ]
+      ],
+      "minTemp": "14.5"
     }
   ]
 }
