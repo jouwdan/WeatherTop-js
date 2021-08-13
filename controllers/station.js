@@ -1,42 +1,42 @@
-'use strict';
+"use strict";
 
 const logger = require("../utils/logger");
+const account = require("./account");
 const weatherUtil = require("../utils/weatherUtil");
 const stationStore = require("../models/station-store");
 const uuid = require("uuid");
 
 const station = {
   index(request, response) {
+    const loggedInUser = account.getCurrentUser(request);
     const stationId = request.params.id;
     logger.info('Station id = ' + stationId);
 
-    let fahrenheit = null;
-    let weatherCodeString = null;
-    let windSpeedInBft = null;
-    let feelsLike = null;
-    let windDirection = null;
-    for (let i = 0; i < stationStore.getStation(stationId).length; i++) {
-      const lastReading = stationStore.getStation(stationId).readings[i][stationStore.getStation(stationId).readings[i].length - 1];
-      
-      weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
-      lastReading.weatherCodeString = weatherCodeString;
-      
-      fahrenheit = weatherUtil.cToF(lastReading.temperature);
-      lastReading.tempInF = fahrenheit;
-      
-      windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
-      lastReading.windSpeedInBft = windSpeedInBft;
+    const currentStation = stationStore.getStation(stationId);
+    const lastReading = currentStation.readings[currentStation.readings.length - 1];
 
-      feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
-      lastReading.feelsLike = feelsLike;
+    if (currentStation.readings.length >= 1) {
+      lastReading.weatherCodeString = weatherUtil.weatherCodeToString(lastReading.code);
+      lastReading.tempInF = weatherUtil.cToF(lastReading.temperature);
+      lastReading.windSpeedInBft = weatherUtil.windSpeedToBft(lastReading.windSpeed);
+      lastReading.feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
+      lastReading.windDirectionText = weatherUtil.windDirectionToText(lastReading.windDirection);
 
-      windDirection = weatherUtil.windDirectionToText(lastReading.windDirection);
-      lastReading.windDirection = windDirection;
+      let minTempSortedArray = currentStation.readings.sort(function(a, b) {
+          return parseFloat(a['temperature']) - parseFloat(b['temperature']);
+      });
+      currentStation.minTemp = weatherUtil.minTemp(currentStation)[0]['temperature'];
+      currentStation.maxTemp = weatherUtil.maxTemp(currentStation)[0]['temperature'];
+      currentStation.minWindSpeed = weatherUtil.minWindSpeed(currentStation)[0]['windSpeed'];
+      currentStation.maxWindSpeed = weatherUtil.maxWindSpeed(currentStation)[0]['windSpeed'];
+      currentStation.minPressure = weatherUtil.minPressure(currentStation)[0]['pressure'];
+      currentStation.maxPressure = weatherUtil.maxPressure(currentStation)[0]['pressure'];
     }
 
     const viewData = {
-      title: "WeatherTop | " + stationStore.getStation(stationId).name,
+      title: "WeatherTop | " + currentStation.name,
       station: stationStore.getStation(stationId),
+      loggedInUser: loggedInUser,
     };
     response.render('station', viewData);
   },
@@ -49,6 +49,7 @@ const station = {
       code: request.body.code,
       temperature: request.body.temperature,
       windSpeed: request.body.windSpeed,
+      windDirection: request.body.windDirection,
       pressure: request.body.pressure,
     };
     stationStore.addReading(stationId, newReading);

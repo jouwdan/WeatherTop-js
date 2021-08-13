@@ -1,0 +1,32 @@
+{{> menu id="signup"}}
+<div class="card bg-base-200 p-4 h-auto inline-flex items-center">
+  <div class="card-body w-1/2">
+    
+<form action="/registration" method="POST">
+  <h3 class="text-3xl text-center">Register</h3>
+  
+  <label class="label">
+    <span class="label-text">First Name</span>
+  </label> 
+  <input type="text" placeholder="John" class="input input-bordered w-full" name="firstName">
+  
+    <label class="label">
+    <span class="label-text">Last Name</span>
+  </label> 
+  <input type="text" placeholder="Doe" class="input input-bordered w-full" name="lastName">
+  
+  <label class="label">
+    <span class="label-text">Email Address</span>
+  </label> 
+  <input type="text" placeholder="john@doe.com" class="input input-bordered w-full" name="email">
+  
+  <label class="label">
+    <span class="label-text">Password</span>
+  </label> 
+  <input type="password" placeholder="password" class="input input-bordered w-full" name="password">
+  
+  <br><br><button class="btn btn-primary btn-block submit">Register</button>
+  <br><button class="btn btn-ghost btn-block">Already have an account? Log in now</button>
+</form>
+</div>
+  </div>

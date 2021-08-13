@@ -1,0 +1,23 @@
+{{> menu id='login' }}
+
+<div class="card bg-base-200 p-4 h-auto inline-flex items-center">
+  <div class="card-body w-1/2">
+    
+<form action="/authentication" method="POST">
+  <h3 class="text-3xl text-center">Login</h3>
+  
+  <label class="label">
+    <span class="label-text">Email Address</span>
+  </label> 
+  <input type="text" placeholder="you@email.com" class="input input-bordered w-full" name="email">
+  
+  <label class="label">
+    <span class="label-text">Password</span>
+  </label> 
+  <input type="password" placeholder="password" class="input input-bordered w-full" name="password">
+  
+  <br><br><button class="btn btn-primary btn-block submit">Login</button>
+  <br><button class="btn btn-ghost btn-block">Don't have an account? Register Now</button>
+</form>
+</div>
+  </div>
