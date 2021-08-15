@@ -67,7 +67,8 @@ const account = {
     }
   },
   update(request, response) {
-    const user = request.params.id;
+    const userId = request.params.id;
+    const user = userStore.getUserById(userId);
     const updatedUserDetails = {
       firstName: request.body.firstName,
       lastName: request.body.lastName,
