@@ -22,9 +22,6 @@ const station = {
       lastReading.feelsLike = weatherUtil.feelsLikeConversion(lastReading.temperature, lastReading.windSpeed);
       lastReading.windDirectionText = weatherUtil.windDirectionToText(lastReading.windDirection);
 
-      let minTempSortedArray = currentStation.readings.sort(function(a, b) {
-          return parseFloat(a['temperature']) - parseFloat(b['temperature']);
-      });
       currentStation.minTemp = weatherUtil.minTemp(currentStation)[0]['temperature'];
       currentStation.maxTemp = weatherUtil.maxTemp(currentStation)[0]['temperature'];
       currentStation.minWindSpeed = weatherUtil.minWindSpeed(currentStation)[0]['windSpeed'];
@@ -43,7 +40,6 @@ const station = {
 
   addReading(request, response) {
     const stationId = request.params.id;
-    const station = stationStore.getStation(stationId);
     const newReading = {
       id: uuid.v1(),
       code: request.body.code,
@@ -53,6 +49,12 @@ const station = {
       pressure: request.body.pressure,
     };
     stationStore.addReading(stationId, newReading);
+    response.redirect('/station/' + stationId);
+  },
+  deleteReading(request, response) {
+    const stationId = request.params.id;
+    const readingId = request.params.readingid;
+    stationStore.removeReading(stationId, readingId);
     response.redirect('/station/' + stationId);
   },
 };

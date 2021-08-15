@@ -68,51 +68,26 @@
           "windDirectionText": "East"
         }
       ],
-      "minTemp": 0.5
+      "minTemp": 0.5,
+      "maxTemp": 8,
+      "minWindSpeed": 1,
+      "maxWindSpeed": 3.5,
+      "minPressure": 999,
+      "maxPressure": 1000
     },
     {
-      "id": "5711c0a0-f93b-11eb-b294-45843ce371c4",
+      "id": "0b07a6c0-fdb9-11eb-843c-a53a2fb60025",
       "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
       "name": "Glenbarrow",
       "latitude": "53.1208",
       "longitude": "7.4551",
-      "readings": [
-        {
-          "id": "85d61650-f942-11eb-ab8e-c16996a9f019",
-          "code": "987",
-          "temperature": "14.5",
-          "windSpeed": "16.9",
-          "windDirection": "312",
-          "pressure": "945",
-          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-poo-storm'></i></span>Unknown",
-          "tempInF": 58.1,
-          "windSpeedInBft": "3 bft",
-          "feelsLike": 13.3,
-          "windDirectionText": "North West"
-        },
-        {
-          "id": "c39683a0-f93b-11eb-911b-07f67b18461d",
-          "code": "123",
-          "temperature": "16.4",
-          "windSpeed": "12.4",
-          "windDirection": "102",
-          "pressure": "806",
-          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-poo-storm'></i></span>Unknown",
-          "tempInF": 61.519999999999996,
-          "windSpeedInBft": "3 bft",
-          "feelsLike": 16,
-          "windDirectionText": "East South East"
-        },
-        {
-          "id": "90c1f010-fc59-11eb-9de5-1dc5d96d41c2",
-          "code": "567",
-          "temperature": "11.1",
-          "windSpeed": "25.6",
-          "windDirection": "265",
-          "pressure": "1010"
-        }
-      ],
-      "minTemp": "14.5"
+      "readings": [],
+      "minTemp": "1123",
+      "maxTemp": "1123",
+      "minWindSpeed": "124",
+      "maxWindSpeed": "124",
+      "minPressure": "2312",
+      "maxPressure": "2312"
     }
   ]
 }

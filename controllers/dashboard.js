@@ -25,10 +25,16 @@ const dashboard = {
         }
       }
 
+      let sortedStations = userStations.sort(function(a, b) {
+        a = a.name.toLowerCase();
+        b = b.name.toLowerCase();
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+
       const viewData = {
         title: "WeatherTop | Dashboard",
         loggedInUser: loggedInUser,
-        stations: userStations,
+        stations: sortedStations,
       };
       response.render("dashboard", viewData);
     } else {
@@ -46,6 +52,11 @@ const dashboard = {
       readings: [],
     };
     stationStore.addStation(newStation);
+    response.redirect("/dashboard");
+  },
+  deleteStation(request, response) {
+    const selectedStation = request.params.id;
+    stationStore.removeStation(selectedStation);
     response.redirect("/dashboard");
   },
 };
