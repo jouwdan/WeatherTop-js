@@ -28,6 +28,17 @@ const station = {
       currentStation.maxWindSpeed = weatherUtil.maxWindSpeed(currentStation)[0]['windSpeed'];
       currentStation.minPressure = weatherUtil.minPressure(currentStation)[0]['pressure'];
       currentStation.maxPressure = weatherUtil.maxPressure(currentStation)[0]['pressure'];
+
+      if (currentStation.readings.length > 2) {
+        const secondLastReading = currentStation.readings[currentStation.readings.length - 2];
+        const thirdLastReading = currentStation.readings[currentStation.readings.length - 3];
+        const lastThreeTempReadings = [lastReading.temperature, secondLastReading.temperature, thirdLastReading.temperature];
+        const lastThreeWindReadings = [lastReading.windSpeed, secondLastReading.windSpeed, thirdLastReading.windSpeed];
+        const lastThreePressureReadings = [lastReading.pressure, secondLastReading.pressure, thirdLastReading.pressure];
+        currentStation.temperatureTrend = weatherUtil.weatherTrend(lastThreeTempReadings);
+        currentStation.windTrend = weatherUtil.weatherTrend(lastThreeWindReadings);
+        currentStation.pressureTrend = weatherUtil.weatherTrend(lastThreePressureReadings);
+      }
     }
 
     const viewData = {
@@ -47,6 +58,7 @@ const station = {
       windSpeed: request.body.windSpeed,
       windDirection: request.body.windDirection,
       pressure: request.body.pressure,
+      date: new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString(),
     };
     stationStore.addReading(stationId, newReading);
     response.redirect('/station/' + stationId);

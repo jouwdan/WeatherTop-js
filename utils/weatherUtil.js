@@ -149,6 +149,18 @@ const weatherUtil = {
             return parseFloat(b['pressure']) - parseFloat(a['pressure']);
         });
     },
+
+    weatherTrend(values) {
+        let trend = null;
+        if ((values[0] > values[1]) && (values[1] > values[2])) {
+            trend = "<span class='icon is-medium text-right text-success'><i class='fas fa-2x fa-arrow-up'></i></span>";
+        } else if ((values[0] < values[1]) && (values[1] < values[2])) {
+            trend = "<span class='icon is-medium text-right text-error'><i class='fas fa-2x fa-arrow-down'></i></span>";
+        } else {
+            trend = "<span class='icon is-medium text-right text-primary'><i class='fas fa-2x fa-equals'></i></span>";
+        }
+        return trend;
+    },
 };
 
 module.exports = weatherUtil;
