@@ -67,15 +67,18 @@ const account = {
     }
   },
   update(request, response) {
-    const userEmail = request.cookies.user;
-    const user = userStore.getUserByEmail(userEmail);
+    const selectedUser = request.params.userid;
     const updatedUserDetails = {
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       email: request.body.email,
       password: request.body.password
     };
-    userStore.updateUser(user, updatedUserDetails);
+    userStore.updateUser(selectedUser, updatedUserDetails);
+    const user = userStore.getUserById(selectedUser);
+    if (user.email != updatedUserDetails.email) {
+      response.cookie("user", updatedUserDetails.email);
+    }
     response.redirect("/account");
   },
 };

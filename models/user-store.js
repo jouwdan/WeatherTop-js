@@ -28,14 +28,11 @@ const userStore = {
     return this.store.findOneBy(this.collection, { password: password });
   },
 
-  updateUser(userEmail, userContent) {
-    let user = this.store.findOneBy(this.collection, { email: userEmail });
+  updateUser(loggedInUser, userContent) {
+    let user = this.store.findOneBy(this.collection, { id: loggedInUser });
     user.firstName = userContent.firstName;
     user.lastName = userContent.lastName;
-    if (user.email != userContent.email) {
-      user.email = userContent.email;
-      response.cookie("user", user.email);
-    }
+    user.email = userContent.email;
     user.password = userContent.password;
     this.store.save();
   },
