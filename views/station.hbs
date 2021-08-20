@@ -39,6 +39,35 @@
     </div>
   </section>
 
+  <section class="card bg-base-200 p-4 mb-4">
+<div class="ui segment" id="chart"></div>
+<script>
+  const data = {
+    labels: [
+      {{#each reading.trendLabels}}
+        "{{this}}",
+      {{/each}}
+    ],
+    datasets: [
+      {
+        name: "Temperature", type: "line",
+        values: [
+          {{#each reading.tempTrend}}
+            {{this}},
+          {{/each}}
+        ]
+      }
+    ]
+  }
+
+  const chart = new frappe.Chart("#chart", {
+    title: "Temperature Trend",
+    data: data,
+    type: 'line',
+    height: 250,
+  })
+</script>
+</section>
 
 {{> listreadings}}
 

@@ -8,7 +8,7 @@ const uuid = require("uuid");
 const axios = require("axios");
 
 const station = {
-  index(request, response) {
+  async index(request, response) {
     const loggedInUser = account.getCurrentUser(request);
     const stationId = request.params.id;
     logger.info('Station id = ' + stationId);
@@ -42,9 +42,33 @@ const station = {
       }
     }
 
+    const lat = currentStation.latitude;
+    const long = currentStation.latitude;
+    const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=metric&appid=43320118d73266b4e45e9a19af419029`;
+    const result = await axios.get(requestUrl);
+    let report = {};
+    if (result.status == 200) {
+      const reading = result.data.current;
+      report.code = reading.weather[0].id;
+      report.temperature = reading.temp;
+      report.windSpeed = reading.wind_speed;
+      report.pressure = reading.pressure;
+      report.windDirection = reading.wind_deg;
+      report.tempTrend = [];
+      report.trendLabels = [];
+      const trends = result.data.daily;
+      for (let i=0; i<trends.length; i++) {
+        report.tempTrend.push(trends[i].temp.day);
+        const date = new Date(trends[i].dt * 1000);
+        console.log(date);
+        report.trendLabels.push(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}` );
+      }
+    }
+
     const viewData = {
       title: "WeatherTop | " + currentStation.name,
       station: stationStore.getStation(stationId),
+      reading: report,
       loggedInUser: loggedInUser,
     };
     response.render('station', viewData);
@@ -90,6 +114,14 @@ const station = {
       report.windDirection = reading.wind_deg;
       report.pressure = reading.pressure;
       report.date = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString();
+      report.tempTrend = [];
+      report.trendLabels = [];
+      const trends = result.data.daily;
+      for (let i=0; i<trends.length; i++) {
+        report.tempTrend.push(trends[i].temp.day);
+        const date = new Date(trends[i].dt * 1000);
+        report.trendLabels.push(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}` );
+      }
     };
     console.log(report);
     stationStore.addReading(stationId, report);
