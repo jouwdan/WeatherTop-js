@@ -3,6 +3,8 @@
     {
       "id": "01",
       "name": "Tramore",
+      "latitude": "52.1624",
+      "longitude": "-7.1524",
       "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
       "readings": [
         {
@@ -49,22 +51,38 @@
           "windSpeed": "6.5",
           "windDirection": "94",
           "pressure": "1000",
-          "date": "2021-08-18T20:13:55.000Z"
+          "date": "2021-08-18T20:13:55.000Z",
+          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-poo-storm'></i></span>Unknown",
+          "tempInF": 53.6,
+          "windSpeedInBft": "2 bft",
+          "feelsLike": 11.7,
+          "windDirectionText": "East"
+        },
+        {
+          "id": "d2114a10-01f0-11ec-988a-63eeea39edb1",
+          "code": 701,
+          "temperature": 15.93,
+          "windSpeed": 4.47,
+          "windDirection": 214,
+          "pressure": 1010,
+          "date": "2021-08-20T20:57:16.000Z"
         }
       ],
       "minTemp": 0.5,
-      "maxTemp": 8,
+      "maxTemp": "12",
       "minWindSpeed": 1,
-      "maxWindSpeed": 3.5,
-      "minPressure": 1002,
+      "maxWindSpeed": "6.5",
+      "minPressure": "1000",
       "maxPressure": 1005,
-      "temperatureTrend": "<span class='icon is-medium'><i class='fas fa-2x fa-arrow-up'></i></span>",
-      "windTrend": "<span class='icon is-medium'><i class='fas fa-2x fa-arrow-down'></i></span>",
-      "pressureTrend": "<span class='icon is-medium'><i class='fas fa-2x fa-arrow-up'></i></span>"
+      "temperatureTrend": "<span class='icon is-medium text-right text-primary'><i class='fas fa-2x fa-equals'></i></span>",
+      "windTrend": "<span class='icon is-medium text-right text-success'><i class='fas fa-2x fa-arrow-up'></i></span>",
+      "pressureTrend": "<span class='icon is-medium text-right text-error'><i class='fas fa-2x fa-arrow-down'></i></span>"
     },
     {
       "id": "05",
       "name": "Dunmore",
+      "latitude": "41.4198",
+      "longitude": "-75.6324",
       "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
       "readings": [
         {
