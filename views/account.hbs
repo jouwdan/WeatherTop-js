@@ -1,0 +1,32 @@
+{{> menu id="account"}}
+
+ <div class="card bg-base-200 p-4 h-auto inline-flex items-center">
+  <div class="card-body w-1/2">
+    
+<form action="/updateaccount/{{loggedInUser.id}}" method="POST">
+  <h3 class="text-3xl text-center">Change Account Details</h3>
+  
+<label class="label">
+    <span class="label-text">First Name</span>
+  </label> 
+  <input type="text" value="{{loggedInUser.firstName}}" class="input input-bordered w-full" name="firstName">
+
+  <label class="label">
+    <span class="label-text">Last Name</span>
+  </label> 
+  <input type="text" value="{{loggedInUser.lastName}}" class="input input-bordered w-full" name="lastName">
+
+  <label class="label">
+    <span class="label-text">Email Address</span>
+  </label> 
+  <input type="text" value="{{loggedInUser.email}}" class="input input-bordered w-full" name="email">
+  
+  <label class="label">
+    <span class="label-text">Password</span>
+  </label> 
+  <input type="password" value="{{loggedInUser.password}}" class="input input-bordered w-full" name="password">
+  
+  <br><br><button class="btn btn-primary btn-block submit">Update Account</button>
+</form>
+</div>
+  </div>

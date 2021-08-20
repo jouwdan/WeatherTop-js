@@ -29,7 +29,10 @@
       {{#each readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa
     </div>
     </div>
-    <a href="/station/{{id}}"><button class="btn btn-primary">View Station</button></a>
+    <div class="flex">
+    <a href="/station/{{id}}"><button class="btn btn-primary">View Station</button></a> &nbsp;
+    <a href="/dashboard/deletestation/{{id}}"><button class="btn btn-error">Delete Station</button></a>
+    </div>
   </section>
 {{/each}}
 

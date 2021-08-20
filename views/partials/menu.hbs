@@ -13,6 +13,9 @@
       <a id="login" class="btn btn-ghost rounded-btn" href="/login">Log In</a> 
       {{/unless}}
       {{#if loggedInUser}}
+      <a id="account" class="btn btn-ghost rounded-btn" href="/account">My Account</a> 
+      {{/if}}
+      {{#if loggedInUser}}
       <a id="logout" class="btn btn-ghost rounded-btn" href="/logout">Log Out</a> 
       {{/if}}
 

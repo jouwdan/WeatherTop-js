@@ -5,6 +5,21 @@ const logger = require('../utils/logger.js');
 const uuid = require('uuid');
 
 const account = {
+  index(request, response) {
+    const loggedInUser = account.getCurrentUser(request);
+    if (loggedInUser) {
+      logger.info("Logged in user: " + loggedInUser.email);
+      logger.info("Rendering account");
+
+      const viewData = {
+        title: "WeatherTop | My Account",
+        loggedInUser: loggedInUser,
+      };
+      response.render("account", viewData);
+    } else {
+      response.redirect("/login");
+    };
+  },
   login(request, response) {
     const loggedInUser = account.getCurrentUser(request);
     const viewData = {
@@ -50,6 +65,21 @@ const account = {
     } else {
       return null;
     }
+  },
+  update(request, response) {
+    const selectedUser = request.params.userid;
+    const updatedUserDetails = {
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
+      email: request.body.email,
+      password: request.body.password
+    };
+    userStore.updateUser(selectedUser, updatedUserDetails);
+    const user = userStore.getUserById(selectedUser);
+    if (user.email != updatedUserDetails.email) {
+      response.cookie("user", updatedUserDetails.email);
+    }
+    response.redirect("/account");
   },
 };
 

@@ -2,16 +2,21 @@
 <table class="table w-full">
       <thead>
         <tr>
+          <th>Date</th>
           <th>Code</th>
           <th>Temperature</th>
           <th>Wind Speed</th>
           <th>Wind Direction</th>
           <th>Pressure</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         {{#each station.readings}}
           <tr>
+            <td>
+              {{date}}
+            </td>
             <td>
               {{code}}
             </td>
@@ -26,6 +31,9 @@
             </td>
             <td>
               {{pressure}}
+            </td>
+            <td>
+              <a href="/station/{{../station.id}}/deletereading/{{id}}"><button class="btn btn-error">Delete</button></a>
             </td>
           </tr>
         {{/each}}

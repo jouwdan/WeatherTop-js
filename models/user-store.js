@@ -26,7 +26,16 @@ const userStore = {
 
   getUserByPassword(password) {
     return this.store.findOneBy(this.collection, { password: password });
-  }
+  },
+
+  updateUser(loggedInUser, userContent) {
+    let user = this.store.findOneBy(this.collection, { id: loggedInUser });
+    user.firstName = userContent.firstName;
+    user.lastName = userContent.lastName;
+    user.email = userContent.email;
+    user.password = userContent.password;
+    this.store.save();
+  },
 };
 
 module.exports = userStore;
