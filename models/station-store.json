@@ -54,43 +54,6 @@
           "windSpeedInBft": "1 bft",
           "feelsLike": 18,
           "windDirectionText": "South South West"
-        },
-        {
-          "id": "04",
-          "code": 700,
-          "temperature": 8,
-          "windSpeed": 1,
-          "pressure": 1005,
-          "windDirection": 101,
-          "date": "2021-06-25T07:20:42.138Z",
-          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-snowflake'></i></span>Snow",
-          "tempInF": 46.4,
-          "windSpeedInBft": "0 bft",
-          "feelsLike": 9.9,
-          "windDirectionText": "East"
-        },
-        {
-          "id": "03",
-          "code": 600,
-          "temperature": 6,
-          "windSpeed": 2,
-          "pressure": 1004,
-          "windDirection": 96,
-          "date": "2021-05-25T07:20:42.138Z"
-        },
-        {
-          "id": "02",
-          "code": 800,
-          "temperature": 0.5,
-          "windSpeed": 3.5,
-          "pressure": 1002,
-          "windDirection": 90,
-          "date": "2021-04-25T07:20:42.138Z",
-          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-bolt'></i></span>Thunder",
-          "tempInF": 32.9,
-          "windSpeedInBft": "1 bft",
-          "feelsLike": -0.2,
-          "windDirectionText": "East"
         }
       ],
       "minTemp": 0.5,
@@ -240,34 +203,6 @@
           "windSpeedInBft": "1 bft",
           "feelsLike": 24.8,
           "windDirectionText": "South East"
-        },
-        {
-          "id": "07",
-          "code": 200,
-          "temperature": 0.5,
-          "windSpeed": 3.5,
-          "pressure": 1000,
-          "windDirection": 102,
-          "date": "2021-03-25T07:20:42.138Z",
-          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-cloud-sun'></i></span>Partial Clouds",
-          "tempInF": 32.9,
-          "windSpeedInBft": "1 bft",
-          "feelsLike": -0.2,
-          "windDirectionText": "East South East"
-        },
-        {
-          "id": "06",
-          "code": 700,
-          "temperature": 8,
-          "windSpeed": 1,
-          "pressure": 999,
-          "windDirection": 98,
-          "date": "2021-02-25T07:20:42.138Z",
-          "weatherCodeString": "<span class='icon is-large'><i class='fas fa-2x fa-snowflake'></i></span>Snow",
-          "tempInF": 46.4,
-          "windSpeedInBft": "0 bft",
-          "feelsLike": 9.9,
-          "windDirectionText": "East"
         }
       ],
       "minTemp": 0.5,

@@ -36,21 +36,21 @@
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Weather</span>
-      {{#each readings}}{{#if @first}}{{{weatherCodeString}}}{{/if}}{{/each}}
+      {{#each readings}}{{#if @last}}{{{weatherCodeString}}}{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Temperature</span>
-      {{#each readings}}{{#if @first}}{{temperature}}°C / {{tempInF}}°F<br>
+      {{#each readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F<br>
       Feels Like: {{feelsLike}}°C{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Wind</span>
-      {{#each readings}}{{#if @first}}
+      {{#each readings}}{{#if @last}}
       Direction: {{windDirectionText}}<br>{{windSpeedInBft}}{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Pressure</span>
-      {{#each readings}}{{#if @first}}{{pressure}}{{/if}}{{/each}} hpa
+      {{#each readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa
     </div>
   </div>
   <div class="flex">
