@@ -39,7 +39,7 @@
 <section class="card bg-base-200 p-4 mb-4">
   <div id="mapid" style="height: 20vh;"></div>
   <script>
-    var mymap = L.map('mapid').setView([52.5424, -7.6921], 8);
+    var mymap = L.map('mapid').setView([53.1424, -7.6921], 6);
     L.tileLayer(
       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam9yZGhhcnIiLCJhIjoiY2tzbGpxemxpMGppNzMycG5iNzltenN5OCJ9.uFMhLLwufg47UcqaU90YDQ', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -54,7 +54,7 @@
       <script>
     var marker{{id}} = L.marker([{{latitude}}, {{longitude}}]);
     marker{{id}}.addTo(mymap);
-    marker{{id}}.bindPopup("{{name}}").openPopup();
+    marker{{id}}.bindPopup("{{name}}");
     </script>
     {{/each}}
 </section>
