@@ -12,22 +12,24 @@ const weatherUtil = {
 
     weatherCodeToString(weatherCode) {
         let weatherCodeString = null;
-        if (weatherCode == 100) {
+        if (weatherCode == 800) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-sun'></i></span><br>Clear";
-        } else if (weatherCode == 200) {
+        } else if (weatherCode == 801 || weatherCode == 802) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-cloud-sun'></i></span>Partial Clouds";
-        } else if (weatherCode == 300) {
+        } else if (weatherCode == 803 || weatherCode == 804) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-cloud'></i></span>Cloudy";
-        } else if (weatherCode == 400) {
+        } else if (weatherCode == 300 || weatherCode == 301 || weatherCode == 302 || weatherCode == 310 || weatherCode == 311 || weatherCode == 312 || weatherCode == 313 || weatherCode == 314 || weatherCode == 321) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-cloud-sun-rain'></i></span>Light Showers";
-        } else if (weatherCode == 500) {
+        } else if (weatherCode == 502 || weatherCode == 503 || weatherCode == 504 || weatherCode == 511 || weatherCode == 522 || weatherCode == 531) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-cloud-showers-heavy'></i></span>Heavy Showers";
-        } else if (weatherCode == 600) {
+        } else if (weatherCode == 500 || weatherCode == 501 || weatherCode == 520 || weatherCode == 521) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-cloud-rain'></i></span>Rain";
-        } else if (weatherCode == 700) {
+        } else if (weatherCode == 600 || weatherCode == 601 ||weatherCode == 602 || weatherCode == 611 || weatherCode == 612 || weatherCode == 613 || weatherCode == 615 || weatherCode == 616 || weatherCode == 620 || weatherCode == 621 || weatherCode == 622) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-snowflake'></i></span>Snow";
-        } else if (weatherCode == 800) {
+        } else if (weatherCode == 200 || weatherCode == 201 || weatherCode == 202 || weatherCode == 210 || weatherCode == 211 || weatherCode == 212 || weatherCode == 221 || weatherCode == 230 || weatherCode == 231 || weatherCode == 232) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-bolt'></i></span>Thunder";
+        }  else if (weatherCode == 701 || weatherCode == 711 || weatherCode == 721 || weatherCode == 731 || weatherCode == 741 || weatherCode == 751 ||weatherCode == 761 || weatherCode == 762 || weatherCode == 771 || weatherCode == 781) {
+            weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-fog'></i></span>Atmosphere";
         } else {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-poo-storm'></i></span>Unknown";
         }

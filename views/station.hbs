@@ -11,11 +11,11 @@
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Weather</span>
-      {{#each station.readings}}{{#if @last}}{{{weatherCodeString}}}{{/if}}{{/each}}
+      {{#each station.readings}}{{#if @first}}{{{weatherCodeString}}}{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Temperature</span>
-      {{#each station.readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F<br>
+      {{#each station.readings}}{{#if @first}}{{temperature}}°C / {{tempInF}}°F<br>
       Feels Like: {{feelsLike}}°C{{/if}}{{/each}}<br>
       Max Temp: {{station.maxTemp}}°C<br>
       Min Temp: {{station.minTemp}}°C<br>
@@ -23,7 +23,7 @@
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Wind</span>
-      {{#each station.readings}}{{#if @last}}
+      {{#each station.readings}}{{#if @first}}
       Direction: {{windDirectionText}}<br>{{windSpeedInBft}}{{/if}}{{/each}}<br>
       Max Speed: {{station.maxWindSpeed}}<br>
       Min Speed: {{station.minWindSpeed}}<br>
@@ -31,7 +31,7 @@
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Pressure</span>
-      {{#each station.readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa<br>
+      {{#each station.readings}}{{#if @first}}{{pressure}}{{/if}}{{/each}} hpa<br>
       Max Pressure: {{station.maxPressure}} hpa<br>
       Min Pressure: {{station.minPressure}} hpa<br>
       {{{station.pressureTrend}}}
@@ -39,6 +39,35 @@
     </div>
   </section>
 
+  <section class="card bg-base-200 p-4 mb-4">
+<div class="ui segment" id="chart"></div>
+<script>
+  const data = {
+    labels: [
+      {{#each reading.trendLabels}}
+        "{{this}}",
+      {{/each}}
+    ],
+    datasets: [
+      {
+        name: "Temperature", type: "line",
+        values: [
+          {{#each reading.tempTrend}}
+            {{this}},
+          {{/each}}
+        ]
+      }
+    ]
+  }
+
+  const chart = new frappe.Chart("#chart", {
+    title: "Temperature Trend",
+    data: data,
+    type: 'line',
+    height: 250,
+  })
+</script>
+</section>
 
 {{> listreadings}}
 

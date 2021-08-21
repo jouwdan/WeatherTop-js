@@ -1,42 +1,66 @@
 {{> menu id="dashboard"}}
 
+
+<section class="card bg-base-200 p-4 mb-4">
+  <div id="mapid" style="height: 20vh;"></div>
+  <script>
+    var mymap = L.map('mapid').setView([53.1424, -7.6921], 6);
+    L.tileLayer(
+      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam9yZGhhcnIiLCJhIjoiY2tzbGpxemxpMGppNzMycG5iNzltenN5OCJ9.uFMhLLwufg47UcqaU90YDQ', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'your.mapbox.access.token'
+      }).addTo(mymap);
+  </script>
+    {{#each stations}}
+      <script>
+    var marker{{name}} = L.marker([{{latitude}}, {{longitude}}]);
+    marker{{name}}.addTo(mymap);
+    marker{{name}}.bindPopup("{{name}}");
+    </script>
+    {{/each}}
+</section>
+
 {{#each stations}}
-  <section class="card bg-base-200 p-4 mb-4">
-    <h2 class="text-xl">
-      {{name}}
-    </h2>
-    <div class="flex flex-wrap container">
-    
+<section class="card bg-base-200 p-4 mb-4">
+  <h2 class="text-xl">
+    {{name}}
+  </h2>
+  <div class="flex flex-wrap container">
+
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">{{name}}</span>
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Weather</span>
-      {{#each readings}}{{#if @last}}{{{weatherCodeString}}}{{/if}}{{/each}}
+      {{#each readings}}{{#if @first}}{{{weatherCodeString}}}{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Temperature</span>
-      {{#each readings}}{{#if @last}}{{temperature}}°C / {{tempInF}}°F<br>
+      {{#each readings}}{{#if @first}}{{temperature}}°C / {{tempInF}}°F<br>
       Feels Like: {{feelsLike}}°C{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Wind</span>
-      {{#each readings}}{{#if @last}}
+      {{#each readings}}{{#if @first}}
       Direction: {{windDirectionText}}<br>{{windSpeedInBft}}{{/if}}{{/each}}
     </div>
     <div class="card flex-1 bg-base-300 p-4 h-auto m-2">
       <span class="text-lg">Pressure</span>
-      {{#each readings}}{{#if @last}}{{pressure}}{{/if}}{{/each}} hpa
+      {{#each readings}}{{#if @first}}{{pressure}}{{/if}}{{/each}} hpa
     </div>
-    </div>
-    <div class="flex">
+  </div>
+  <div class="flex">
     <a href="/station/{{id}}"><button class="btn btn-primary">View Station</button></a> &nbsp;
     <a href="/dashboard/deletestation/{{id}}"><button class="btn btn-error">Delete Station</button></a>
-    </div>
-  </section>
+  </div>
+</section>
 {{/each}}
 
 <section class="card bg-base-200 p-4 mb-4">
-    <h2 class="text text-xl">Add Station</h2>
-    {{> addstation}}
-  </section>
+  <h2 class="text text-xl">Add Station</h2>
+  {{> addstation}}
+</section>
