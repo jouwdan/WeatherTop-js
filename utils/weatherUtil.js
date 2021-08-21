@@ -29,7 +29,7 @@ const weatherUtil = {
         } else if (weatherCode == 200 || weatherCode == 201 || weatherCode == 202 || weatherCode == 210 || weatherCode == 211 || weatherCode == 212 || weatherCode == 221 || weatherCode == 230 || weatherCode == 231 || weatherCode == 232) {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-bolt'></i></span>Thunder";
         }  else if (weatherCode == 701 || weatherCode == 711 || weatherCode == 721 || weatherCode == 731 || weatherCode == 741 || weatherCode == 751 ||weatherCode == 761 || weatherCode == 762 || weatherCode == 771 || weatherCode == 781) {
-            weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-fog'></i></span>Atmosphere";
+            weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-smog'></i></span>Atmosphere";
         } else {
             weatherCodeString = "<span class='icon is-large'><i class='fas fa-2x fa-poo-storm'></i></span>Unknown";
         }
