@@ -52,9 +52,9 @@
   </script>
     {{#each stations}}
       <script>
-    var marker{{id}} = L.marker([{{latitude}}, {{longitude}}]);
-    marker{{id}}.addTo(mymap);
-    marker{{id}}.bindPopup("{{name}}");
+    var marker{{name}} = L.marker([{{latitude}}, {{longitude}}]);
+    marker{{name}}.addTo(mymap);
+    marker{{name}}.bindPopup("{{name}}");
     </script>
     {{/each}}
 </section>
